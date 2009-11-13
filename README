@@ -1,0 +1,19 @@
+MeetroDC is a Google Android (2.0) application that allows users to look up DC Metro train times.
+
+This can also serve as a learning tool, as it's a pretty basic Android application. Bon appetit.
+
+
+NOTE: We're not affiliated at all with WMATA.
+NOTE: We're also not affiliated with Meetro. But since Meetro is a failed startup, I doubt they would care. Right?
+
+Hopefully forthcoming features:
+* Navigable Map
+* Nearest Station (via GPS)
+* Better display and handling of train times (right now we're just displaying their web page)
+* "My Stations" list
+
+
+
+This software is licensed under the CC-GNU GPL version 2.0 or later. 
+http://creativecommons.org/licenses/LGPL/2.1/
+
