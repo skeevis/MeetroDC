@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/splash_background"
+    >
+<ImageView
+    android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:scaleType="fitCenter"
+        android:src="@drawable/droidee_logo" />
+</FrameLayout>
