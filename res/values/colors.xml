@@ -4,4 +4,6 @@
 <color name="button_color">#FF6400</color>
 <color name="splash_background">#000000</color>
 <color name="menu_background">#7D7D7C</color>
+<color name="white_background">#FFF</color>
+
 </resources>

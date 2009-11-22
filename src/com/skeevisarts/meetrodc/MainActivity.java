@@ -5,17 +5,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.WebView;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.ZoomControls;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends TabActivity {
@@ -40,6 +43,12 @@ public class MainActivity extends TabActivity {
 	ListView orange_view;
 	ArrayAdapter<Station> orange_aa;
 
+	MetroMapView map_view;
+	
+	ZoomControls zc;
+
+	private GestureDetector _gestureDetector;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,8 @@ public class MainActivity extends TabActivity {
 		green_view = (ListView) findViewById(R.id.green_view);
 		blue_view = (ListView) findViewById(R.id.blue_view);
 		yellow_view = (ListView) findViewById(R.id.yellow_view);
+		map_view = (MetroMapView) findViewById(R.id.map_view);
+		zc = (ZoomControls) findViewById(R.id.zoom_controls);
 		
 		
 		redStations = new ArrayList<Station>();
@@ -77,7 +88,7 @@ public class MainActivity extends TabActivity {
 				getResources().getDrawable(R.drawable.green)).setContent(
 				R.id.green_view));
 
-		
+		mTabHost.addTab(mTabHost.newTabSpec("tab_map").setIndicator("Map",getResources().getDrawable(R.drawable.compass)).setContent(R.id.map_wrapper_view));
 
 		int layoutID = android.R.layout.simple_list_item_1;
 		red_aa = new ArrayAdapter<Station>(this, layoutID, redStations);
@@ -104,7 +115,27 @@ public class MainActivity extends TabActivity {
 
 		mTabHost.setCurrentTab(0);
 		readStationCSV();
+		zc.setOnZoomInClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				map_view.zoomImageIn();
+			}
+		});
 		
+		zc.setOnZoomOutClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				map_view.zoomImageOut();
+			}
+		});
+        _gestureDetector = new GestureDetector(this, _gestureListener);
+	}
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		super.onTouchEvent(event);
+			_gestureDetector.onTouchEvent(event);
+		
+		return true;
 	}
 
 	protected void readStationCSV() {
@@ -125,7 +156,7 @@ public class MainActivity extends TabActivity {
 			}
 			br.close();
 		} catch (Exception e) {
-			Log.e(this.getClass().toString(), "Exception!");
+			Log.e(this.getClass().toString(), "Exception! "+e.getClass().toString());
 		}
 	}
 	
@@ -136,7 +167,6 @@ public class MainActivity extends TabActivity {
 		public void onItemClick(AdapterView<?> av, View v, int index,
 				long arg3) {
 			Station station = (Station) av.getAdapter().getItem(index);
-			
 			Intent intent = new Intent("com.skeevisarts.meetrodc.StationTimesActivity");
 			Bundle b = new Bundle();
 			b.putInt("station_id", station.getId());
@@ -145,4 +175,52 @@ public class MainActivity extends TabActivity {
 		}
 	};
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private OnGestureListener _gestureListener = new OnGestureListener() {
+
+		float actX = 0;
+		float actY = 0;
+		
+		
+		public boolean onSingleTapUp(MotionEvent e) {
+			return false;
+		}
+		
+		public void onShowPress(MotionEvent e) {
+		}
+		
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float _distanceX,
+				float _distanceY) {
+			if(actX == 0) actX =  e2.getX();
+			if(actY == 0) actY =  e2.getY();
+			float distanceX = actX- e2.getX();
+			float distanceY = actY- e2.getY();
+			actX = e2.getX();
+			actY =  e2.getY();
+			map_view.panMap(distanceX, distanceY);
+			return false;
+		}
+		
+		public void onLongPress(MotionEvent e) {
+		}
+		
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+				float velocityY) {
+			return false;
+		}
+		
+		public boolean onDown(MotionEvent e) {
+			actX = 0;
+			actY = 0;
+			return false;
+		}
+	};
 }

@@ -18,6 +18,19 @@
 				android:layout_height="fill_parent" />
 			<ListView android:id="@+id/yellow_view"
 				android:layout_width="fill_parent" android:layout_height="fill_parent" />
+				<RelativeLayout android:id="@+id/map_wrapper_view" 		android:background="@color/white_background"	android:layout_width="fill_parent" android:layout_height="fill_parent" >
+				
+			<view
+  class="com.skeevisarts.meetrodc.MetroMapView"  android:id="@+id/map_view"
+				 android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+ />				
+
+<ZoomControls android:id="@+id/zoom_controls"  android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:layout_alignParentBottom="true" 
+    android:layout_centerHorizontal="true" />
+				</RelativeLayout>				
 			
 		</FrameLayout>
 	</LinearLayout>
