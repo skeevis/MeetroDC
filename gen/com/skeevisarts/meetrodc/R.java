@@ -28,20 +28,22 @@ public final class R {
         public static final int yellow=0x7f020007;
     }
     public static final class id {
-        public static final int blue_view=0x7f070001;
-        public static final int green_view=0x7f070003;
-        public static final int map_view=0x7f070006;
-        public static final int map_wrapper_view=0x7f070005;
-        public static final int orange_view=0x7f070002;
-        public static final int red_view=0x7f070000;
-        public static final int webview=0x7f070008;
-        public static final int yellow_view=0x7f070004;
-        public static final int zoom_controls=0x7f070007;
+        public static final int blue_view=0x7f070002;
+        public static final int green_view=0x7f070004;
+        public static final int map_view=0x7f070007;
+        public static final int map_wrapper_view=0x7f070006;
+        public static final int orange_view=0x7f070003;
+        public static final int red_view=0x7f070001;
+        public static final int shortcut_list=0x7f070000;
+        public static final int webview=0x7f070009;
+        public static final int yellow_view=0x7f070005;
+        public static final int zoom_controls=0x7f070008;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
-        public static final int splash=0x7f030001;
-        public static final int web_view=0x7f030002;
+        public static final int launcher_shortcuts=0x7f030000;
+        public static final int main=0x7f030001;
+        public static final int splash=0x7f030002;
+        public static final int web_view=0x7f030003;
     }
     public static final class raw {
         public static final int data=0x7f040000;

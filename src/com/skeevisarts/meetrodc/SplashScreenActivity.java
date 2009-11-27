@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 
 public class SplashScreenActivity extends Activity {
 	protected boolean _active = true;
-	protected int _splashTime = 5000; // time to display the splash screen in ms
+	protected int _splashTime = 2000; // time to display the splash screen in ms
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,13 +28,9 @@ public class SplashScreenActivity extends Activity {
 					// do nothing
 				} finally {
 					finish();
-					// startActivity(new
-					// Intent("com.skeevisarts.patternjocks.PatternJocksMain"));
-					// startActivity(new Intent("patternjocksmain"));
 					Intent intent = new Intent(
 							"com.skeevisarts.meetrodc.MainActivity");
 					startActivity(intent);
-
 					stop();
 				}
 			}
